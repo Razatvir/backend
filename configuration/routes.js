@@ -4,6 +4,9 @@ import globArray from "glob-array";
 import colors from "colors";
 import { fileURLToPath, pathToFileURL } from 'url';
 
+
+
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename)
 
@@ -20,11 +23,10 @@ function loadApiRoutes(app) {
 
   routesFiles.forEach(async function (routePath) {
     console.log(colors.cyan(path.basename(routePath)));
-    import(routePath)
-    .then((module) => {
-      return module.default(app)
+    import(pathToFileURL(routePath))
+    .then((module) => module.default(app))
+    .catch((error) => {
+      throw error
+    })
   })
-    .catch((error) => console.log("000000000000000", error));
-
-  });
 }

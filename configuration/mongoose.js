@@ -4,7 +4,7 @@ import path from 'path';
 import globArray from 'glob-array';
 import colors from 'colors';
 import dotenv from 'dotenv'
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 dotenv.config()
 
 const __filename = fileURLToPath(import.meta.url);
@@ -23,7 +23,7 @@ function registerSchemas() {
     console.log(colors.yellow('Loading Mongo DB Schemas for: ' + process.env.DB_NAME + ' database'));
     mongoSchemas.forEach(async function (routePath) {
         console.log(colors.cyan(path.basename(routePath)));
-        await import(routePath);
+        await import(pathToFileURL(routePath));
     });
 }
 

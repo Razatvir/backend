@@ -28,7 +28,7 @@ export default function (app) {
   app.use(morgan('[:date[clf]] :method :url :status :response-time ms - :res[content-length]'));
 
   initialiseMongoose(); //Import all of the Mongo models
-  console.log("yyyyyyyyyyyyyyy")
+ 
 
   configureRoutes(app); //Import all of the routes
 
